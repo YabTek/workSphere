@@ -27,4 +27,6 @@ const applicationSchema = new Schema({
   });
   
   
-export default Application = mongoose.model('Application',applicationSchema);
+const Application = mongoose.model('Application',applicationSchema);
+
+module.exports = Application;

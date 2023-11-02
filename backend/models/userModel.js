@@ -47,8 +47,8 @@ userSchema.pre("save", async function() {
     this.password = await bcrypt.hash(this.password, salt)
 })
 
-userSchema.methods.comparePassword = async function(enteredPassword) {
-    return await bcrypt.compare(this.password, enteredPassword)
+userSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare( enteredPassword, this.password);
 }
 
 userSchema.methods.generateToken = function() {
@@ -57,4 +57,5 @@ userSchema.methods.generateToken = function() {
         )
 }
 
-export default User = mongoose.model('User',userSchema);
+const User = mongoose.model('User',userSchema);
+module.exports = User;

@@ -21,4 +21,5 @@ const freelancerSchema = new Schema({
     timestamps: true,
   })
 
-export default Freelancer = mongoose.model('Freelancer', freelancerSchema);
+const Freelancer = mongoose.model('Freelancer', freelancerSchema);
+module.exports = Freelancer;
