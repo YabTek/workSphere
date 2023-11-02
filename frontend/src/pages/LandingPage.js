@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../components/Logo";
+import Logo from "../components/logo";
 import Position from "../components/Position";
 import workingimg from "../assets/working.png";
 import linkedin from "../assets/linkedin.png";
