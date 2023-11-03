@@ -2,7 +2,7 @@ import React from 'react'
 
 const Card = ({title,description,salary,hours}) => {
   return (
-    <div class="bg-[#D3DEF9] rounded-[18px] shadow-md p-8 mx-20 my-12">
+    <div class="bg-[#D3DEF9] rounded-[18px] shadow-md p-8 mx-[7rem] my-12">
       <h2 class="text-xl font-semibold mb-4">{title}</h2>
       <p class="text-black mb-1"><span class="font-semibold">Salary:</span>  {salary}</p>
       <p class="text-black mb-1"><span class="font-semibold">Description:</span>  {description}</p>

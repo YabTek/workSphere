@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import AuthPage from './pages/AuthPage';
 import JobListPage from './pages/JobListPage';
+import JobDetailPage from './pages/JobDetailPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path = "/signup" element = {<SignupPage/>} />
         <Route path = "/choose" element = {<AuthPage/>} />
         <Route path = "/joblist" element = {<JobListPage/>} />
+        <Route path = "/jobdetail" element = {<JobDetailPage/>} />
       </Routes>
     </BrowserRouter>
   );
