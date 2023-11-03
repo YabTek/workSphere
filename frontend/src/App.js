@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import AuthPage from './pages/AuthPage';
 import JobListPage from './pages/JobListPage';
 import JobDetailPage from './pages/JobDetailPage';
+import ClientPage from './pages/ClientPage';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path = "/choose" element = {<AuthPage/>} />
         <Route path = "/joblist" element = {<JobListPage/>} />
         <Route path = "/jobdetail" element = {<JobDetailPage/>} />
+        <Route path = "/client" element = {<ClientPage/>} />
       </Routes>
     </BrowserRouter>
   );
