@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const authRoute = require('./routes/authRoutes');
 const jobRoute = require('./routes/jobRoutes');
 const freelancerRoute = require('./routes/freelancerRoutes');
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://127.0.0.1/workSphere")
 .then(()=>console.log("connected to mongoDB"))
 .catch(err=>console.log(err))
 
+app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
 app.use('/api/users', authRoute)
