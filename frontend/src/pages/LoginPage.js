@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useSelector, useDispatch} from 'react-redux'
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import { login, selectAuth } from "../redux/features/auth/authSlice";
 
 const LoginPage = () => {
@@ -52,18 +52,18 @@ const LoginPage = () => {
             {auth.loginStatus === "pending" ? "Pending": "Login"}
           </button>
           {auth.loginStatus === "rejected" ? 
-          <p class = "text-[#F70D0D]">{auth.loginError.message}</p> : null}
+          <p class = "text-[#F70D0D] italic">{auth.loginError.message}</p> : null}
         </div>
       </form>
       <div class="flex justify-around text-lg px-2">
-        <a href="vxvd" class="text-blue-600 hover:text-blue-400">
+        <Link to = "/forgetPassword" class="text-blue-600 hover:text-blue-400">
           forget password?
-        </a>
+        </Link>
         <h1>
           Don't have an account?
-          <a href="xvd" class="text-blue-600 hover:text-blue-400">
-            signUp
-          </a>
+          <Link class="text-blue-600 hover:text-blue-400" to = "/chooseAccount">
+            signup
+          </Link>
         </h1>
       </div>
     </div>

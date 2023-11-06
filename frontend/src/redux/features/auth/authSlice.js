@@ -9,6 +9,11 @@ const initialState = {
   loginError: "",
   registerStatus: "",
   registerError: "",
+  forgetPasswordStatus: "",
+  forgetPasswordError: "",
+  resetPasswordStatus: "",
+  resetPasswordError: ""
+
 };
 
 export const register = createAsyncThunk(
@@ -43,6 +48,29 @@ export const login = createAsyncThunk(
   }
 );
 
+export const forgetPassword = createAsyncThunk("auth/forgetPassword",
+    async(email, {rejectWithValue}) => {
+        try{
+            const response = await axios.post("/users/forgetPassword", email)
+            return response.data
+        }
+        catch(err){
+            return rejectWithValue(err.response.data)
+        }
+
+ })
+
+export const resetPassword = createAsyncThunk("auth/resetPassword",
+    async(credentials, {rejectWithValue}) => {
+        try{
+            const response = await axios.post("/users/resetPassword", credentials)
+            return response.data
+        }
+        catch(err){
+            return rejectWithValue(err.response.data)
+        }
+ })
+ 
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -83,6 +111,26 @@ const authSlice = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.loginStatus = "rejected";
       state.loginError = action.payload;
+    });
+    builder.addCase(forgetPassword.pending, (state, action) => {
+        state.forgetPasswordStatus = "pending";
+      });
+    builder.addCase(forgetPassword.fulfilled, (state, action) => {
+      state.forgetPasswordStatus = "success";
+    });
+    builder.addCase(forgetPassword.rejected, (state, action) => {
+      state.forgetPasswordStatus = "rejected";
+      state.forgetPasswordError = action.payload
+    });
+    builder.addCase(resetPassword.pending, (state, action) => {
+        state.resetPasswordStatus = "pending";
+      });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.resetPasswordStatus = "success";
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
+      state.resetPasswordStatus = "rejected";
+      state.resetPasswordError = action.payload
     });
   },
 });

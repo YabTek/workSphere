@@ -62,7 +62,7 @@ const SignupPage = () => {
             onChange = {e => setPassword(e.target.value)}
           />
            {auth.registerStatus === "rejected" ? (
-          <p class = "text-[#F70D0D]">{auth.registerError.message}</p>
+          <p class = "text-[#F70D0D] italic">{auth.registerError.message}</p>
         ) : null}
           <button
             type="submit"

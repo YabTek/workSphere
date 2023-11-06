@@ -1,5 +1,7 @@
 const User = require("../models/userModel");
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -41,13 +43,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const transporter = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+
 
 const forgetPassword = async (req, res) => {
   try {
@@ -63,15 +59,26 @@ const forgetPassword = async (req, res) => {
 
     const resetToken = user.generateToken();
 
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false, // Disable SSL verification
+      },
+    });
+
     const mailOptions = {
-      from: process.env.EMAIL,
-      to: email,
-      subject: "Password Reset",
-      text: `Click the following link to reset your password: https://password.com/reset-password?token=${resetToken}`,
-    };
-
+          from: process.env.EMAIL,
+          to: email,
+          subject: "Password Reset",
+          text: `Click the following link to reset your password: http://localhost:3000/resetPassword/${resetToken}`,
+        };
     await transporter.sendMail(mailOptions);
-
     res.status(200).json({ message: "Password reset link sent to your email" });
   } catch (error) {
     console.error(error);
@@ -83,26 +90,26 @@ const resetPassword = async (req, res) => {
   try {
     const { resetToken, newPassword } = req.body;
 
-    try {
-      const decoded = jwt.verify(resetToken, process.env.JWT_SECRET_KEY);
-      const userId = decoded.userId;
+    const info = jwt.verify(resetToken, process.env.JWT_SECRET_KEY);
+    const userId = info.userId;
 
-      const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-      if (!user) {
-        return res.status(400).json({ message: "Invalid reset token" });
-      }
-
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-      user.password = hashedPassword;
-      await user.save();
-
-      res.status(200).json({ message: "Password reset successful" });
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({ message: "Invalid reset token" });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid reset token" });
     }
+
+    if (await user.comparePassword(newPassword)) {
+      return res.status(400).json({ message: "Enter a password that is different from the previous one" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    await User.findByIdAndUpdate(userId, { $set: { password: hashedPassword } });
+
+    res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
