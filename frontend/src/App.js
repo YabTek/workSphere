@@ -7,6 +7,8 @@ import AuthPage from './pages/AuthPage';
 import JobListPage from './pages/JobListPage';
 import JobDetailPage from './pages/JobDetailPage';
 import ClientPage from './pages/ClientPage';
+import ClientProfilePage from './pages/ClientProfilePage';
+import freelancerProfilePage from './pages/freelancerProfilePage';
 
 
 function App() {
@@ -15,11 +17,13 @@ function App() {
       <Routes>
         <Route path = "/" element = {<LandingPage/>} />
         <Route path = "/login" element = {<LoginPage/>} />
-        <Route path = "/signup" element = {<SignupPage/>} />
-        <Route path = "/choose" element = {<AuthPage/>} />
+        <Route path = "/signup/:role" element = {<SignupPage/>} />
+        <Route path = "/chooseAccount" element = {<AuthPage/>} />
         <Route path = "/joblist" element = {<JobListPage/>} />
         <Route path = "/jobdetail" element = {<JobDetailPage/>} />
         <Route path = "/client" element = {<ClientPage/>} />
+        <Route path = "/clientprofile" element = {<ClientProfilePage/>} />
+        <Route path = "/freelancer" element = {<freelancerProfilePage/>} />
       </Routes>
     </BrowserRouter>
   );

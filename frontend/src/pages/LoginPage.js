@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from "react-router-dom"
-import { login } from "../redux/features/auth/authSlice";
+import { login, selectAuth } from "../redux/features/auth/authSlice";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const auth = useSelector(state => state.auth)
-  console.log(auth)
+  const auth = useSelector(selectAuth)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

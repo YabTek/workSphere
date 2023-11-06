@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../components/logo";
 import Position from "../components/Position";
 import workingimg from "../assets/working.png";
@@ -18,16 +19,21 @@ const LandingPage = () => {
       <div class="md:flex justify-between">
         <Logo />
         <div>
-          <button class="w-36 h-10  text-2xl font-serif font-bold bg-[#C8F3F3] border-none shadow-md">
-            login
-          </button>
-          <button class="w-36 h-10 my-14 mx-16 text-2xl font-serif font-bold bg-[#C8F3F3] border-none shadow-md">
-            signup
-          </button>
+          <Link to = "/login">
+            <button class="w-36 h-10  text-2xl font-serif font-bold bg-[#C8F3F3] hover:bg-blue-200 border-none shadow-md">
+              login
+            </button>
+          </Link>
+          <Link to = "/chooseAccount">
+            <button class="w-36 h-10 my-14 mx-16 text-2xl font-serif font-bold bg-[#C8F3F3] hover:bg-blue-200 border-none shadow-md">
+              signup
+            </button>
+          </Link>
+          
         </div>
       </div>
       <div class="flex justify-around mb-16">
-        <div class="text-3xl py-60">
+        <div class="text-3xl py-60 text-center">
           <p>Make your dreams</p>
           <p>
             a reality with{" "}
