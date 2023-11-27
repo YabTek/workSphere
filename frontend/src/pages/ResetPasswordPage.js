@@ -70,7 +70,7 @@ const ResetPasswordPage = () => {
               class="bg-[#46A9A9] hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              {auth.resetPasswordStatus === "pending"? "pending" : "Reset Password" }
+              {auth.resetPasswordStatus === "pending"? "pending" : "Change Password" }
             </button>
           </div>
           

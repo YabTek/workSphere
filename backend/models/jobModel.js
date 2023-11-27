@@ -5,7 +5,8 @@ const jobSchema = new Schema({
   client: {
     type: Schema.Types.ObjectId,
     ref: 'Client',
-    required: true,
+    required: true
+ 
   },
   title: {
     type: String,
@@ -15,9 +16,12 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
-  skillsRequired: [{
-    type: String
-}],
+  location: {
+    type: String,
+  },
+  workinghours: {
+    type: Number
+},
   salary: {
     type: Number,
     required: true,

@@ -2,8 +2,8 @@ const Job = require('../models/jobModel')
 
 const createJob = async(req,res) => {
     try {
-        const { client, title, description, skillsRequired, salary } = req.body;
-        const job = new Job({ client, title, description, skillsRequired, salary });
+        const { client, title, description, location, workinghours, salary } = req.body;
+        const job = new Job({ client, title, description, location, workinghours, salary });
         const savedJob = await job.save();
         res.status(201).json(savedJob);
       } 
@@ -15,7 +15,7 @@ const createJob = async(req,res) => {
 
 const getAllJobs = async (req, res) => {
     try {
-      const jobs = await Job.find();
+      const jobs = await Job.find().sort({ createdAt: 'desc' });
       res.status(200).json(jobs);
     } catch (error) {
       console.error(error);
@@ -39,8 +39,8 @@ const getJobById = async (req, res) => {
 const updateJob = async (req, res) => {
     try {
       const jobId = req.params.id;
-      const { client, title, description, skillsRequired, salary } = req.body;
-      const updatedJob = await Job.findByIdAndUpdate(jobId, { client, title, description, skillsRequired, salary }, { new: true });
+      const { title, description, location, workinghours, salary } = req.body;
+      const updatedJob = await Job.findByIdAndUpdate(jobId, {  title, description, location, workinghours, salary }, { new: true });
       if (!updatedJob) {
         return res.status(404).json({ message: 'Job not found' });
       }

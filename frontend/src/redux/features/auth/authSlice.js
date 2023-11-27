@@ -103,6 +103,7 @@ const authSlice = createSlice({
       state.loginStatus = "pending";
     });
     builder.addCase(login.fulfilled, (state, action) => {
+  
       const info = jwtDecode(action.payload);
       state.role = info.role;
       state._id = info.userId;

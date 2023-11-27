@@ -1,11 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux"
 import Logo from "../components/logo";
 import profile from "../assets/profile.png";
 import setting from "../assets/setting.png";
 import bell from "../assets/bell.png";
 import Card from "../components/Card";
+import {selectJob, getAllJobs} from "../redux/features/job/jobSlice";
 
 const JobListPage = () => {
+  const dispatch = useDispatch()
+  const {jobs} = useSelector(selectJob)
+  console.log(jobs)
+
+  useEffect(() => {
+    dispatch(getAllJobs())
+  },[dispatch])
+
   return (
     <div>
       <div class="flex justify-between">
@@ -58,36 +68,19 @@ const JobListPage = () => {
           </svg>
         </button>
       </form>
-      <Card
-        title="Backend developer"
-        description="Are you on the lookout for a seasoned backend developer who can skillfully tackle your 
-        projects with a deep well of expertise and unwavering precision? Our quest leads us
-        to seek out a proficient backend developer, a true maestro of code, who can 
-        seamlessly translate your conceptual ideas into high-quality, impeccably functional
-        solutions that not only meet but exceed your expectations."
-        salary="20$ per hour"
-        hours="40hrs"
-      />
-      <Card
-        title="Web developer"
-        description="Are you on the lookout for a seasoned backend developer who can skillfully tackle your 
-        projects with a deep well of expertise and unwavering precision? Our quest leads us
-        to seek out a proficient backend developer, a true maestro of code, who can 
-        seamlessly translate your conceptual ideas into high-quality, impeccably functional
-        solutions that not only meet but exceed your expectations."
-        salary="20$ per hour"
-        hours="40hrs"
-      />
-      <Card
-        title="Python developer"
-        description="Are you on the lookout for a seasoned backend developer who can skillfully tackle your 
-        projects with a deep well of expertise and unwavering precision? Our quest leads us
-        to seek out a proficient backend developer, a true maestro of code, who can 
-        seamlessly translate your conceptual ideas into high-quality, impeccably functional
-        solutions that not only meet but exceed your expectations."
-        salary="20$ per hour"
-        hours="40hrs"
-      />
+      {jobs.map((job) => (
+          <Card
+          title={job.title}
+          description={job.description}
+          salary={job.salary}
+          location={job.location}
+          hours={job.workinghours}
+          showButtons={false}
+        />
+      ))}
+      
+      
+     
     </div>
   );
 };

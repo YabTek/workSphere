@@ -11,6 +11,7 @@ import ClientProfilePage from './pages/ClientProfilePage';
 import freelancerProfilePage from './pages/freelancerProfilePage';
 import ForgetPasswordPage from './pages/forgetPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import AddJobPage from './pages/AddJobPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path = "/joblist" element = {<JobListPage/>} />
         <Route path = "/jobdetail" element = {<JobDetailPage/>} />
         <Route path = "/client" element = {<ClientPage/>} />
+        <Route path = "/addjob" element = {<AddJobPage/>} />
         <Route path = "/clientprofile" element = {<ClientProfilePage/>} />
         <Route path = "/freelancer" element = {<freelancerProfilePage/>} />
       </Routes>

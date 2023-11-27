@@ -6,21 +6,21 @@ import { login, selectAuth } from "../redux/features/auth/authSlice";
 const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const auth = useSelector(selectAuth)
+  const {loginStatus, loginError, _id, role} = useSelector(selectAuth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(auth._id){
-      if(auth.role === 'freelancer'){
+    if(_id){
+      if(role === 'freelancer'){
         navigate("/joblist")
       }
-      else if(auth.role === 'client'){
+      else if(role === 'client'){
         navigate("/client")
       }
     }
-  }, [auth._id, auth.role, navigate])
+  }, [_id, role, navigate])
 
   const handleSubmit = (e) => {
       e.preventDefault()
@@ -49,10 +49,10 @@ const LoginPage = () => {
             type="submit"
             class=" bg-[#B0E8E8] hover:bg-blue-300 rounded-lg w-full p-3.5 font-bold text-xl font-serif text-black-50 text-center my-8 mb-2"
           >
-            {auth.loginStatus === "pending" ? "Pending": "Login"}
+            {loginStatus === "pending" ? "Pending": "Login"}
           </button>
-          {auth.loginStatus === "rejected" ? 
-          <p class = "text-[#F70D0D] italic">{auth.loginError.message}</p> : null}
+          {loginStatus === "rejected" ? 
+          <p class = "text-[#F70D0D] italic">{loginError.message}</p> : null}
         </div>
       </form>
       <div class="flex justify-around text-lg px-2">
