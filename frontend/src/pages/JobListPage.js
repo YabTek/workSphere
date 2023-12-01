@@ -1,16 +1,18 @@
 import React, {useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux"
+import {Link} from "react-router-dom"
 import Logo from "../components/logo";
 import profile from "../assets/profile.png";
 import setting from "../assets/setting.png";
 import bell from "../assets/bell.png";
 import Card from "../components/Card";
 import {selectJob, getAllJobs} from "../redux/features/job/jobSlice";
+import { IconButton, Menu, MenuItem } from '@mui/material';
+
 
 const JobListPage = () => {
   const dispatch = useDispatch()
   const {jobs} = useSelector(selectJob)
-  console.log(jobs)
 
   useEffect(() => {
     dispatch(getAllJobs())
@@ -35,6 +37,9 @@ const JobListPage = () => {
               alt=""
             />
           </div>
+           <div>
+   
+    </div>
         </div>
       </div>
 
@@ -69,18 +74,21 @@ const JobListPage = () => {
         </button>
       </form>
       {jobs.map((job) => (
-          <Card
-          title={job.title}
-          description={job.description}
-          salary={job.salary}
-          location={job.location}
-          hours={job.workinghours}
-          showButtons={false}
-        />
+          <Link to={`/jobdetail/${job._id}`}>
+            <Card
+            key = {job._id}
+            jobId={job._id}
+            title={job.title}
+            description={job.description}
+            salary={job.salary}
+            location={job.location}
+            hours={job.workinghours}
+            showButtons={false}
+          />
+          </Link>
+         
       ))}
       
-      
-     
     </div>
   );
 };
