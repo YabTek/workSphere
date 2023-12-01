@@ -12,7 +12,11 @@ const clientSchema = new Schema({
     },
     companyWebsite: {
         type: String
-    }
+    },
+    jobs: [{
+        type: Schema.Types.ObjectId,
+        ref: "Job"
+    }]
 },{
     timestamps: true,
   })

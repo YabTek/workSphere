@@ -16,6 +16,9 @@ const applicationSchema = new Schema({
       type: String,
       required: true,
     },
+    files: [{
+      type: String,
+    }],
     status: {
       type: String,
       enum: ['applied', 'accepted', 'rejected', 'completed', 'canceled'],

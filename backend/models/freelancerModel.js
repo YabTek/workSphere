@@ -7,6 +7,10 @@ const freelancerSchema = new Schema({
         ref: "User",
         required: true
     },
+    jobs: [{
+        type: Schema.Types.ObjectId,
+        ref: "Job"
+    }],
     skills: [{
         type: String
     }],
@@ -21,5 +25,5 @@ const freelancerSchema = new Schema({
     timestamps: true,
   })
 
-const Freelancer = mongoose.model('Freelancer', freelancerSchema);
+const Freelancer= mongoose.model('Freelancer', freelancerSchema);
 module.exports = Freelancer;
