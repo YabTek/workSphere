@@ -3,12 +3,13 @@ import axios from 'axios';
 
 const initialState = {
     jobs: [],
+    jobDetail: "",
     addJobStatus: "",
     addJobError: "",
     updateJobStatus: "",
+    updateJobError: "",
     deleteJobStatus: "",
-    getJobStatus: "",
-   
+    getJobStatus: "",   
 }
 
 
@@ -55,6 +56,17 @@ export const getAllJobs = createAsyncThunk("job/getAllJobs",
         }
     })
 
+export const getJobDetail = createAsyncThunk("job/getJobDetail",
+    async(id, {rejectWithValue}) => {
+        try{
+            const response = await axios.get(`/jobs/${id}`)
+            return response.data
+        }
+        catch(err){
+            return rejectWithValue(err.response.data)
+        }
+    })
+
 const jobSlice = createSlice({
     name: "job",
     initialState,
@@ -83,9 +95,15 @@ const jobSlice = createSlice({
             state.jobs[index] = action.payload
             state.updateJobStatus = "success"
         });
+        builder.addCase(updateJob.rejected, (state, action) => {
+            state.updateJobError = "rejected"
+        });
         builder.addCase(deleteJob.fulfilled, (state,action) =>{
             state.jobs = state.jobs.filter(job => job._id !== action.payload)
             state.deleteJobStatus = "success"
+        })
+        builder.addCase(getJobDetail.fulfilled, (state,action) =>{
+            state.jobDetail = action.payload
         })
         
     }
