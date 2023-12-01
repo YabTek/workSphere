@@ -1,15 +1,18 @@
 // Card.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {Link} from 'react-router-dom'
+// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { deleteJob, selectJob, updateJob } from '../redux/features/job/jobSlice';
+import { selectAuth } from '../redux/features/auth/authSlice';
 import DeletePopup from './Popup';  
 
 const Card = ({ title, description, salary, hours, location, showButtons, jobId }) => {
   const dispatch = useDispatch();
+  const {role} = useSelector(selectAuth)
 
   const [editableTitle, setEditableTitle] = useState(title);
-  const [editableDescription, setEditableDescription] = useState(description);
+  const [editableDescription, setEditableDescription] = useState(description.substring(0, 150));
   const [editableSalary, setEditableSalary] = useState(salary);
   const [editableLocation, setEditableLocation] = useState(location);
   const [editableHours, setEditableHours] = useState(hours);
@@ -37,7 +40,7 @@ const Card = ({ title, description, salary, hours, location, showButtons, jobId 
 
   
   return (
-    <div className="bg-[#D3DEF9] rounded-[18px] shadow-md p-8 mx-[7rem] my-12">
+    <div className="bg-[#D3DEF9] rounded-[18px] shadow-2xl shadow-indigo-500/50  p-8 mx-[8rem] my-14">
       {showButtons ? (
         <div className="flex justify-between">
           <h2
@@ -49,7 +52,7 @@ const Card = ({ title, description, salary, hours, location, showButtons, jobId 
           </h2>
           <div className="mx-4">
             <button className="mx-2 text-red-500" onClick={() => setDeletingOpen(true)}>
-              <DeleteForeverIcon />
+              {/* <DeleteForeverIcon /> */}
             </button>
           </div>
         </div>
@@ -77,10 +80,12 @@ const Card = ({ title, description, salary, hours, location, showButtons, jobId 
         <span
           contentEditable={true}
           onInput={(e) => setEditableDescription(e.target.textContent)}
-          className="focus:outline-none focus:border-none"
+          className="focus:outline-none focus:border-none "
         >
           {editableDescription}
         </span>
+          <Link to={role === "client" ? `/filljobStatus/${jobId}` : `/jobDetailPage/${jobId}`}
+           class = "font-semibold underline text-[#C754C4]">...More</Link>
       </p>
       <p className="text-black mb-1">
         <span className="font-semibold">Location: </span>

@@ -47,11 +47,12 @@ const AddJobPage = () => {
 
       <form onSubmit={handleSubmit}>
         <div class="p-10">
-          <div class="ml-8 mr-[25rem]">
+          <div class="flex flex-row">
+          <div class="ml-8 flex flex-col basis-1/2">
             <label class="text-md font-semibold">Job title</label>
             <input
               type="text"
-              class="relative mt-1 rounded-lg shadow-sm bg-[#DCE4E4] border-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
+              class="relative mt-1 rounded-lg shadow-lg bg-[#DCE4E4] border-none focus:outline-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
               required
               onChange={e => setTitle(e.target.value)}
             />
@@ -59,7 +60,7 @@ const AddJobPage = () => {
             <label class="text-md font-semibold">Job description</label>
             <input
               type="text"
-              class="relative mt-1 rounded-lg shadow-sm bg-[#DCE4E4] border-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
+              class="relative mt-1 rounded-lg shadow-lg bg-[#DCE4E4] border-none focus:outline-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
               required
               onChange={e => setDescription(e.target.value)}
             />
@@ -67,15 +68,16 @@ const AddJobPage = () => {
             <label class="text-md font-semibold">Location</label>
             <input
               type="text"
-              class="relative mt-1 rounded-lg shadow-sm bg-[#DCE4E4] border-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
+              class="relative mt-1 rounded-lg shadow-lg bg-[#DCE4E4] border-none focus:outline-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
               required
               onChange={e => setLocation(e.target.value)}
             />
-
+            </div>
+            <div class="flex flex-col basis-1/2 mx-[6rem]">
             <label class="text-md font-semibold">Salary</label>
             <input
               type="text"
-              class="relative mt-1 rounded-lg shadow-sm bg-[#DCE4E4] border-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
+              class="relative mt-1 rounded-lg shadow-lg bg-[#DCE4E4] border-none focus:outline-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
               required
               onChange={e => setSalary(e.target.value)}
             />
@@ -83,24 +85,28 @@ const AddJobPage = () => {
             <label class="text-md font-semibold">Working hours</label>
             <input
               type="text"
-              class="relative mt-1 rounded-lg shadow-sm bg-[#DCE4E4] border-none text-gray-800 rounded-lg text-lg focus:ring-blue-500 w-full p-4 my-8"
+              class="relative mt-1 rounded-lg shadow-lg bg-[#DCE4E4] border-none focus:outline-none text-gray-800 text-lg w-full p-4 my-8"
               required
               onChange={e => setWorkinghours(e.target.value)}
             />
-           
-          </div>
-          {addJobStatus === "success" ? 
-          <p class = "text-[#55FF05] ml-8">Job has been posted</p> : null
+             {addJobStatus === "success" ? 
+          <p class = "text-[#4ED70D] font-semibold -mb-[1.7rem]">Job has been posted</p> : null
             }
             {addJobStatus === "rejected" ? 
-          <p class = "text-[#F70D0D] italic ml-8">{addJobError.message}</p> : null
+          <p class = "text-[#F70D0D] italic -mb-[1.7rem]">{addJobError.message}</p> : null
             }
-          <button
+            <button
             type="submit"
-            class=" bg-[#B0E8E8] hover:bg-blue-300 rounded-lg w-[42.5rem] p-3.5 font-bold text-xl font-serif text-black-50 ml-8 my-8 "
+            class=" bg-[#B0E8E8] hover:bg-blue-300 rounded-lg p-3.5 font-bold text-xl font-serif text-black-50 my-8 "
           >
             Post job
           </button>
+         
+          
+            </div>
+             
+          </div>
+          
         </div>
       </form>
     </div>
