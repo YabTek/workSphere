@@ -2,7 +2,7 @@ const Job = require('../models/jobModel')
 
 const createJob = async(req,res) => {
     try {
-        const { client, title, description, location, workinghours, salary } = req.body;
+        const { client, title, description, location, workinghours, salary} = req.body;
         const job = new Job({ client, title, description, location, workinghours, salary });
         const savedJob = await job.save();
         res.status(201).json(savedJob);
@@ -39,8 +39,8 @@ const getJobById = async (req, res) => {
 const updateJob = async (req, res) => {
     try {
       const jobId = req.params.id;
-      const { title, description, location, workinghours, salary } = req.body;
-      const updatedJob = await Job.findByIdAndUpdate(jobId, {  title, description, location, workinghours, salary }, { new: true });
+      const { title, description, location, workinghours, salary, jobStatus } = req.body;
+      const updatedJob = await Job.findByIdAndUpdate(jobId, {  title, description, location, workinghours, salary, jobStatus }, { new: true });
       if (!updatedJob) {
         return res.status(404).json({ message: 'Job not found' });
       }
