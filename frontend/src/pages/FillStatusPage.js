@@ -32,13 +32,13 @@ const FillStatusPage = () => {
           <p className="text-justify">
             {jobDetail.description}.
             <br />
-            Your company is located in <span className="text-[#02B9B9] font-bold">{jobDetail.location}</span>.
+            Your company is located in {jobDetail.location}.
             <br />
-            You will pay <span className="text-[#D72AD2] font-bold">${jobDetail.salary}</span> with {jobDetail.workinghours} working hours per week.
+            You will pay ${jobDetail.salary} with {jobDetail.workinghours} working hours per week.
           </p>
           <hr className="border border-gray-300 my-2" />
           <br />
-          <p className="text-lg font-semibold mb-3">Please fill the current status of the job</p>
+          <p className="text-lg font-semibold mb-3 pt-3">Please fill the current status of the job</p>
           <div className="flex items-center space-x-4">
             <label className="flex items-center space-x-2">
               <input

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
-// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { deleteJob, selectJob, updateJob } from '../redux/features/job/jobSlice';
 import { selectAuth } from '../redux/features/auth/authSlice';
 import DeletePopup from './Popup';  
@@ -41,7 +42,7 @@ const Card = ({ title, description, salary, hours, location, showButtons, jobId 
   
   return (
     <div className="bg-[#D3DEF9] rounded-[18px] shadow-2xl shadow-indigo-500/50  p-8 mx-[8rem] my-14">
-      {showButtons ? (
+       
         <div className="flex justify-between">
           <h2
             className="text-xl font-semibold mb-4 focus:outline-none focus:border-none"
@@ -50,21 +51,17 @@ const Card = ({ title, description, salary, hours, location, showButtons, jobId 
           >
             {editableTitle}
           </h2>
+          {showButtons ?(
           <div className="mx-4">
             <button className="mx-2 text-red-500" onClick={() => setDeletingOpen(true)}>
-              {/* <DeleteForeverIcon /> */}
+              <DeleteForeverIcon />
             </button>
-          </div>
+            <button>
+              <VisibilityIcon />
+            </button>
+          </div>) : null }
         </div>
-      ) : (
-        <h2
-          className="text-xl font-semibold mb-4 focus:outline-none focus:border-none"
-          contentEditable={true}
-          onInput={(e) => setEditableTitle(e.target.textContent)}
-        >
-          {editableTitle}
-        </h2>
-      )}
+     
       <p className="text-black mb-1">
         <span className="font-semibold">Salary: </span>
         <span
