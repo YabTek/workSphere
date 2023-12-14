@@ -1,21 +1,28 @@
-import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import FileUpload from './FileUpload';
 import { addApplication } from '../redux/features/application/applicationSlice';
+import { selectAuth } from '../redux/features/auth/authSlice';
 
-const Application = ({ onClose }) => {
+const Application = ({ onClose, job }) => {
   const dispatch = useDispatch()
-  const [letter,setLetter] = useState("")
-  const [files,setFiles] = useState("")
+  const {_id} = useSelector(selectAuth)
+  const [coverLetter,setCoverLetter] = useState("")
+  const [projectFiles,setProjectFiles] = useState([])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(addApplication())
+  const handleFileChange = (uploadedFiles) => {
+    setProjectFiles(uploadedFiles);
   };
 
+ 
+  const handleSubmit = () => {
+    dispatch(addApplication({coverLetter, projectFiles, job, freelancer: _id}))
+  };
+  
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-      <div className="bg-[#D3DEF9] p-8 mt-12 w-[30rem] rounded-lg">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 overflow-y-auto z-50">
+      <div className="bg-[#D3DEF9] p-8 mt-12 w-[30rem] rounded-lg ">
         <h2 className="text-2xl font-bold mb-4">Application Form</h2>
 
         <label className="block mb-4">
@@ -23,20 +30,10 @@ const Application = ({ onClose }) => {
           <textarea
             className="w-full h-32 p-2 mt-2 border border-gray-300 rounded-md bg-[#A8B7DE] placeholder-gray-600"
             placeholder="Write your cover letter here..."
-            onChange={e=>setLetter(e.target.value)}
+            onChange={e=>setCoverLetter(e.target.value)}
           ></textarea>
         </label>
-
-        {/* Project Files Upload */}
-        {/* <label className="block mb-4">
-          <span className="text-lg font-semibold">Upload Project Files:</span>
-          <input
-            type="file"  multiple
-            className="w-full p-2 mt-2 border border-gray-300 rounded-md"
-           
-          />
-        </label> */}
-        <FileUpload/>
+        <FileUpload onFileChange = {handleFileChange}/>
 
         <button
           onClick={() => {

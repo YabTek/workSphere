@@ -62,7 +62,7 @@ const FillStatusPage = () => {
             </label>
           </div>
           {updateJobStatus === "success"?
-               <p class = "text-[#4ED70D] font-semibold -mb-[1.5rem] pt-6">Job has been updated</p> : null
+               <p class = "text-[#4ED70D] font-semibold -mb-[1.5rem] pt-6">Job status has been updated</p> : null
           }
            {updateJobStatus === "rejected" ? 
           <p class = "text-[#F70D0D] italic -mb-[1.7rem]">{updateJobError.message}</p> : null
